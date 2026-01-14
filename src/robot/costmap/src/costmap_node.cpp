@@ -13,10 +13,10 @@ CostmapNode::CostmapNode() : Node("costmap"), costmap_(robot::CostmapCore(this->
   double resolution = this->get_parameter("resolution").as_double();
   int width = this->get_parameter("width").as_int();
   int height = this->get_parameter("height").as_int();
-  double inflationRadius = this->get_parameter("inflationRadius").as_double();
+  double inflation_radius = this->get_parameter("inflationRadius").as_double();
 
   // set up costmap core
-  costmap_.setParameters(resolution, width, height, inflationRadius);
+  costmap_.setParameters(resolution, width, height, inflation_radius);
 
   laserscan_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>("/lidar", 10, std::bind(&CostmapNode::laserscanCallback, this, std::placeholders::_1));
   costmap_pub_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>("/costmap", 1);
